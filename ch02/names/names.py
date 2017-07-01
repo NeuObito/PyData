@@ -113,3 +113,15 @@ if __name__ == '__main__':
     # plt.plot(diversity.axes[0].values, diversity.F.values)
     # plt.plot(diversity.axes[0].values, diversity.M.values)
     # plt.show()
+
+    # "最后一个字母的变革"
+    # 从name列取出最后一个字母
+    last_letters = names.name.map(lambda x: x[-1])
+    last_letters.name = 'last_letters'
+
+    table = names.pivot_table('births', index=last_letters, columns=['sex', 'year'], aggfunc=sum)
+    subtable = table.reindex(columns=[1910, 1960, 2010], level='year')
+
+    letter_prop = subtable/subtable.sum().astype(float)
+
+    
